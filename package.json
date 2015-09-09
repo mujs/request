@@ -1,0 +1,8 @@
+{
+  "pkgDependencies": {
+    "mujs/define": "*",
+    "mujs/fn": "*",
+    "mujs/each": "*",
+    "mujs/async": "*"
+  }
+}
