@@ -3,6 +3,7 @@ define('request', function (require) {
 
   var partial = require('mu.fn.partial'),
       each    = require('mu.list.each'),
+      reduce  = require('mu.list.reduce'),
       events  = require('mu.async.events');
 
   var httpRequest = function (method, url, data) {
@@ -24,24 +25,32 @@ define('request', function (require) {
   };
 
   var interpolateUrl = function (template, params) {
-    each(params, function (item, index) {
-      template = template.replace(':' + index, item);
+    return reduce(params, template, function (acc, item, index) {
+      return acc.replace(':' + index, item);
     });
-
-    return template;
   };
 
-  var prepareRequest = function (method, urlTemplate, urlParams, data) {
-    var url = interpolateUrl(urlTemplate, urlParams);
+  var queryString = function (query) {
+    return reduce(query, '', function (acc, item, index) {
+      acc += acc ? '&' : '?';
+      acc += index + '=' + item;
+      return acc;
+    });
+  };
+
+  var prepareRequest = function (method, template, params, query, data) {
+    var url = interpolateUrl(template, params) + queryString(query);
     return httpRequest(method, url, data);
   };
 
-  var request = function (url) {
-    return {
-      get: partial(prepareRequest, 'GET', url),
-      post: partial(prepareRequest, 'POST', url),
-      put: partial(prepareRequest, 'PUT', url),
-      'delete': partial(prepareRequest, 'DELETE', url)
+  var request = function (urlTemplate) {
+    return function (params) {
+      return {
+        get: partial(prepareRequest, 'GET', urlTemplate, params),
+        post: partial(prepareRequest, 'POST', urlTemplate, params, null),
+        put: partial(prepareRequest, 'PUT', urlTemplate, params, null),
+        delete: partial(prepareRequest, 'DELETE', urlTemplate, params)
+      };
     };
   };
 
