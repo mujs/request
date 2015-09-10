@@ -3,6 +3,6 @@
     "mujs/define": "*",
     "mujs/fn": "*",
     "mujs/each": "*",
-    "mujs/async": "*"
+    "mujs/events": "*"
   }
 }
