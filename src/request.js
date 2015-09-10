@@ -2,7 +2,6 @@ define('request', function (require) {
   'use strict';
 
   var partial = require('mu.fn.partial'),
-      each    = require('mu.list.each'),
       reduce  = require('mu.list.reduce'),
       events  = require('mu.async.events');
 
