@@ -1,4 +1,4 @@
-define('request', function (require) {
+module('mu.request', function (require) {
   'use strict';
 
   var partial = require('mu.fn.partial'),

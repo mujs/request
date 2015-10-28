@@ -1,1 +1,4 @@
+# build system
+node_modules
 dependencies
+dist

@@ -1,8 +1,24 @@
 {
+  "name": "request",
   "pkgDependencies": {
-    "mujs/define": "*",
+    "mujs/module": "*",
     "mujs/fn": "*",
     "mujs/each": "*",
     "mujs/events": "*"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-eslint": "*",
+    "gulp-mocha": "*",
+    "gulp-concat-sourcemap": "*",
+    "del": "*",
+    "module.nodeify": "mujs/module.nodeify",
+    "expect.js": "*",
+    "mockery": "*"
+  },
+  "scripts": {
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "dist": "gulp dist"
   }
 }
